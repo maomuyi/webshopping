@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
         rootView=inflater.inflate(R.layout.fragment_home,container,false);
         //初始化控件
         leftRecyclerView  = rootView.findViewById(R.id.leftRecyclerView);
+        rightRecyclerView  = rootView.findViewById(R.id.rightRecyclerView);
         return rootView;
     }
 
