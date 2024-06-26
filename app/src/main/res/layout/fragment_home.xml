@@ -37,7 +37,9 @@
     android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rightRecyclerView"
+        tools:listitem="@layout/right_list_item"
         android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
