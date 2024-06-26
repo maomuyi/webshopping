@@ -1,7 +1,6 @@
 package com.lfy.lfy202120201124.entity;
 
 
-
 public class UserInfo {
     private int user_id;
     private String username;

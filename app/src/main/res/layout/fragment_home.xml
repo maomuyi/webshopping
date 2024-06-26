@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
 
@@ -13,5 +14,33 @@
         android:background="@color/my_light_primary"
         app:title="首页"
         app:titleTextColor="@color/white"/>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <androidx.appcompat.widget.LinearLayoutCompat
+          android:layout_width="100dp"
+          android:layout_height="match_parent">
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/leftRecyclerView"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+          </androidx.recyclerview.widget.RecyclerView>
+          
+      </androidx.appcompat.widget.LinearLayoutCompat>
+      <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rightRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
