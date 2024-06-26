@@ -1,5 +1,6 @@
 package com.lfy.lfy202120201124.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 public class LeftListAdapter extends RecyclerView.Adapter<LeftListAdapter.MyHolder> {
 
     private List<String> datalist = new ArrayList<>();
+    private int currentIndex=0;
 
     public LeftListAdapter(List<String> datalist) {
         this.datalist = datalist;
@@ -23,12 +25,14 @@ public class LeftListAdapter extends RecyclerView.Adapter<LeftListAdapter.MyHold
 
     @NonNull
     @Override
+
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_list_item, null);
         return new MyHolder(view);
     }
 
     @Override
+    @SuppressLint("RecyclerView")
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
         //绑定数据
         String name = datalist.get(position);
@@ -42,6 +46,12 @@ public class LeftListAdapter extends RecyclerView.Adapter<LeftListAdapter.MyHold
                 }
             }
         });
+        //设置点击颜色变化
+        if (currentIndex ==position){
+            holder.itemView.setBackgroundResource(R.drawable.type_selecotr_bg);
+        }else {
+            holder.itemView.setBackgroundResource(R.drawable.type_selector_normal_bg);
+        }
     }
 
     @Override
@@ -67,5 +77,9 @@ public class LeftListAdapter extends RecyclerView.Adapter<LeftListAdapter.MyHold
     public interface LeftListOnClickItemLietener{
         void OnItemClick(int position);
 
+    }
+    public void setCurrentIndex(int position){
+        this.currentIndex=position;
+        notifyDataSetChanged();
     }
 }

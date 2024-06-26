@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void OnItemClick(int position) {
                 Toast.makeText(getActivity(), position+"---", Toast.LENGTH_SHORT).show();
+                leftListAdapter.setCurrentIndex(position);
             }
         });
     }
