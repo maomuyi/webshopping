@@ -14,6 +14,8 @@ import android.widget.Toolbar;
 
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.LeftListAdapter;
+import com.lfy.lfy202120201124.adapter.RightListAdapter;
+import com.lfy.lfy202120201124.entity.DataService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class HomeFragment extends Fragment {
 
     private View rootView;
     private RecyclerView rightRecyclerView;
+    private RightListAdapter rightListAdapter;
     private RecyclerView leftRecyclerView;
     private LeftListAdapter leftListAdapter;
     private List<String> leftDataList = new ArrayList<>();
@@ -45,8 +48,14 @@ public class HomeFragment extends Fragment {
         leftDataList.add("beyerdynamic");
         leftDataList.add("Sony");
         leftDataList.add("FiiO");
+
         leftListAdapter = new LeftListAdapter(leftDataList);
         leftRecyclerView.setAdapter(leftListAdapter);
+
+        rightListAdapter = new RightListAdapter();
+        leftRecyclerView.setAdapter(rightListAdapter);
+        //默认加载第一个分类
+        rightListAdapter.setListData(DataService.getListData(0));
 
         //recyclerView点击事件
         leftListAdapter.setLeftListOnClickItemLietener(new LeftListAdapter.LeftListOnClickItemLietener() {
@@ -54,6 +63,8 @@ public class HomeFragment extends Fragment {
             public void OnItemClick(int position) {
                 Toast.makeText(getActivity(), position+"---", Toast.LENGTH_SHORT).show();
                 leftListAdapter.setCurrentIndex(position);
+                //点击分类切换对应数据
+                rightListAdapter.setListData(DataService.getListData(position));
             }
         });
     }
