@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.lfy.lfy202120201124.db.UserDbHelper;
+import com.lfy.lfy202120201124.entity.UserInfo;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;
@@ -45,15 +48,27 @@ public class LoginActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(username) && TextUtils.isEmpty(password)){
                     Toast.makeText(LoginActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
                 }else{
-                    String name = mSharedPreferences.getString("username",null);
-                    String pwd = mSharedPreferences.getString("password", null);
-                    if (username.equals(name) && password.equals(pwd)){
-                        //登录成功
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                    }else{
-                        Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+//                    String name = mSharedPreferences.getString("username",null);
+//                    String pwd = mSharedPreferences.getString("password", null);
+                    UserInfo login = UserDbHelper.getInstance(LoginActivity.this).login(username);
+                    if (login!=null){
+                        if (username.equals(login.getUsername()) && password.equals(login.getPassword())){
+                            //勾选保存密码
+                            SharedPreferences.Editor editor = mSharedPreferences.edit();
+                            editor.putBoolean("is_login",is_login);
+                            editor.commit();
+                            //登录成功
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Toast.makeText(LoginActivity.this, "请先注册账号", Toast.LENGTH_SHORT).show();
                     }
+
+
 
                 }
             }

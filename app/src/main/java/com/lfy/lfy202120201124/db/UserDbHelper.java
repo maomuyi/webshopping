@@ -55,11 +55,11 @@ public class UserDbHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {username};
         Cursor cursor = db.rawQuery(sql, selectionArgs);
         if (cursor.moveToNext()) {
-            int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            int user_id = cursor.getInt(cursor.getColumnIndex("user_id"));
             String name = cursor.getString(cursor.getColumnIndex("username"));
             String password = cursor.getString(cursor.getColumnIndex("password"));
             String  nickname = cursor.getString(cursor.getColumnIndex("nickname"));
-            userInfo = new UserInfo(_id, name, password, nickname);
+            userInfo = new UserInfo(user_id, name, password, nickname);
         }
         cursor.close();
         db.close();
