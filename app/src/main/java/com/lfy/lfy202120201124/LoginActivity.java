@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;
     private SharedPreferences mSharedPreferences;
+    private CheckBox checkbox;
+    private boolean is_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         //初始化控件
         et_username = findViewById(R.id.et_username);
         et_password = findViewById(R.id.et_password);
+        checkbox = findViewById(R.id.checkbox);
+
+        //是否勾选记住密码
+        is_login = mSharedPreferences.getBoolean("is_login",false);
+        if (is_login){
+            String username = mSharedPreferences.getString("username",null);
+            String password = mSharedPreferences.getString("password",null);
+            et_username.setText(username);
+            et_password.setText(password);
+            checkbox.setChecked(true);
+        }
 
         //点击注册
         findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
@@ -56,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
                             //勾选保存密码
                             SharedPreferences.Editor editor = mSharedPreferences.edit();
                             editor.putBoolean("is_login",is_login);
+                            editor.putString("username",username);
+                            editor.putString("password",password);
                             editor.commit();
                             //登录成功
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -71,6 +88,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 }
+            }
+        });
+        //勾选记住密码
+        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                is_login=isChecked;
             }
         });
     }
