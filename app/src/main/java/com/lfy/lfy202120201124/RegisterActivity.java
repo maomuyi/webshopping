@@ -52,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
                     int row = UserDbHelper.getInstance(RegisterActivity.this).register(username, password, "暂无~~");
                     //提交
                     if (row>0){
-
                         Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_SHORT).show();
                         finish();
                     }
