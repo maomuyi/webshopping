@@ -1,11 +1,15 @@
 package com.lfy.lfy202120201124.db;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.lfy.lfy202120201124.entity.UserInfo;
 
 public class UserDbHelper extends SQLiteOpenHelper {
     private static UserDbHelper sHelper;
@@ -40,7 +44,27 @@ public class UserDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
     //登录
+    @SuppressLint("Range")
+    public UserInfo login(String username) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getReadableDatabase();
+        UserInfo userInfo = null;
+        String sql = "select user_id,username,password,nickname  from user_table where username=?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        if (cursor.moveToNext()) {
+            int _id = cursor.getInt(cursor.getColumnIndex("_id"));
+            String name = cursor.getString(cursor.getColumnIndex("username"));
+            String password = cursor.getString(cursor.getColumnIndex("password"));
+            String  nickname = cursor.getString(cursor.getColumnIndex("nickname"));
+            userInfo = new UserInfo(_id, name, password, nickname);
+        }
+        cursor.close();
+        db.close();
+        return userInfo;
+    }
 
     //注册
     public int register(String username, String password, String  nickname) {

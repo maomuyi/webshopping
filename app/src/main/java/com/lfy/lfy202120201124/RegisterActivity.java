@@ -9,17 +9,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.lfy.lfy202120201124.db.UserDbHelper;
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_password;
-    private SharedPreferences mSharedPreferences;
+    //private SharedPreferences mSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         //获取mSharedPreferences
-        mSharedPreferences = getSharedPreferences("user",MODE_PRIVATE);
+        //mSharedPreferences = getSharedPreferences("user",MODE_PRIVATE);
 
         //初始化控件
         et_username = findViewById(R.id.et_username);
@@ -43,13 +45,18 @@ public class RegisterActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(username)&&TextUtils.isEmpty(password)){
                     Toast.makeText(RegisterActivity.this, "请输入用户名和密码", Toast.LENGTH_SHORT).show();
                 }else {
-                    SharedPreferences.Editor editor = mSharedPreferences.edit();
-                    editor.putString("username",username);
-                    editor.putString("password",password);
+//                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+//                    editor.putString("username",username);
+//                    editor.putString("password",password);
+//                    editor.commit();
+                    int row = UserDbHelper.getInstance(RegisterActivity.this).register(username, password, "暂无~~");
                     //提交
-                    editor.commit();
-                    Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_SHORT).show();
-                    finish();
+                    if (row>0){
+
+                        Toast.makeText(RegisterActivity.this, "注册成功，请登录", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
                 }
             }
         });
