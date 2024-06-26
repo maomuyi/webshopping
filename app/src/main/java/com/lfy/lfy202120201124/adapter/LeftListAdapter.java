@@ -33,6 +33,15 @@ public class LeftListAdapter extends RecyclerView.Adapter<LeftListAdapter.MyHold
         //绑定数据
         String name = datalist.get(position);
         holder.tv_name.setText(name);
+        //分类的点击事件
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null!=leftListOnClickItemLietener){
+                    leftListOnClickItemLietener.OnItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -47,8 +56,16 @@ public class LeftListAdapter extends RecyclerView.Adapter<LeftListAdapter.MyHold
             tv_name = itemView.findViewById(R.id.name);
         }
     }
+    private LeftListOnClickItemLietener leftListOnClickItemLietener;
+
+
+    public void setLeftListOnClickItemLietener(LeftListOnClickItemLietener leftListOnClickItemLietener) {
+        this.leftListOnClickItemLietener = leftListOnClickItemLietener;
+    }
+
     //点击事件
     public interface LeftListOnClickItemLietener{
+        void OnItemClick(int position);
 
     }
 }

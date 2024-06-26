@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.LeftListAdapter;
@@ -44,5 +46,13 @@ public class HomeFragment extends Fragment {
         leftDataList.add("FiiO");
         leftListAdapter = new LeftListAdapter(leftDataList);
         leftRecyclerView.setAdapter(leftListAdapter);
+
+        //recyclerView点击事件
+        leftListAdapter.setLeftListOnClickItemLietener(new LeftListAdapter.LeftListOnClickItemLietener() {
+            @Override
+            public void OnItemClick(int position) {
+                Toast.makeText(getActivity(), position+"---", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
