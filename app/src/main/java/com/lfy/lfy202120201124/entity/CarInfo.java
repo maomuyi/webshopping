@@ -6,10 +6,10 @@ public class CarInfo {
     private int product_id;
     private int product_img;
     private String product_title;
-    private String product_price;
+    private int product_price;
     private int product_count;
 
-    public CarInfo(int car_id, String username, int product_id, int product_img, String product_title, String product_price, int product_count) {
+    public CarInfo(int car_id, String username, int product_id, int product_img, String product_title, int product_price, int product_count) {
         this.car_id = car_id;
         this.username = username;
         this.product_id = product_id;
@@ -67,11 +67,11 @@ public class CarInfo {
         this.product_title = product_title;
     }
 
-    public String getProduct_price() {
+    public int getProduct_price() {
         return product_price;
     }
 
-    public void setProduct_price(String product_price) {
+    public void setProduct_price(int product_price) {
         this.product_price = product_price;
     }
 }
