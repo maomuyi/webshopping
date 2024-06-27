@@ -1,5 +1,6 @@
 package com.lfy.lfy202120201124.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -26,12 +27,13 @@ public class CarDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //创建car_table表
-        db.execSQL("create table car_table(_id integer primary key autoincrement, " +
+        db.execSQL("create table car_table(car_id integer primary key autoincrement, " +
                 "username text," +
                 "product_id text," +
                 "product_img integer," +
                 "product_title text," +
-                "product_price integer" +
+                "product_price integer," +
+                "product_count integer" +
                 ")");
 
 
@@ -42,6 +44,21 @@ public class CarDbHelper extends SQLiteOpenHelper {
 
     }
 
-
-    //TODO 在这里根据自己的业务需求，编写增删改查的方法，如下所示 作者：浩宇软件开发 https://www.bilibili.com/read/cv24747762/ 出处：bilibili
+    //购物车添加商品
+    public int addCar(String username, int product_id, int product_img, String product_title, String product_price) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        //填充占位符
+        values.put("username", username);
+        values.put("product_id", product_id);
+        values.put("product_img", product_img);
+        values.put("product_title", product_title);
+        values.put("product_price", product_price);
+        String nullColumnHack = "values(null,?,?,?,?,?)";
+        //执行
+        int insert = (int) db.insert("car_table", nullColumnHack, values);
+        db.close();
+        return insert;
+    }
 }

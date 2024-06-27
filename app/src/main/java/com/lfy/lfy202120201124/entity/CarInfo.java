@@ -7,14 +7,24 @@ public class CarInfo {
     private int product_img;
     private String product_title;
     private String product_price;
+    private int product_count;
 
-    public CarInfo(int car_id, String username, int product_id, int product_img, String product_title, String product_price) {
+    public CarInfo(int car_id, String username, int product_id, int product_img, String product_title, String product_price, int product_count) {
         this.car_id = car_id;
         this.username = username;
         this.product_id = product_id;
         this.product_img = product_img;
         this.product_title = product_title;
         this.product_price = product_price;
+        this.product_count = product_count;
+    }
+
+    public int getProduct_count() {
+        return product_count;
+    }
+
+    public void setProduct_count(int product_count) {
+        this.product_count = product_count;
     }
 
     public int getCar_id() {
