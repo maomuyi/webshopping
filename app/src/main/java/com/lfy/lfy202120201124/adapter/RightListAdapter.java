@@ -38,12 +38,23 @@ public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.MyHo
         holder.product_title.setText(productInfo.getProduct_title());
         holder.product_details.setText(productInfo.getProduct_details());
         holder.product_price.setText(productInfo.getProduct_price()+"");
+
+        //点击事件
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null!=mOnItemClickListener){
+                    mOnItemClickListener.onItemClick(productInfo,position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return productInfos.size();
     }
+
 
     static class MyHolder extends RecyclerView.ViewHolder{
         ImageView product_img;
@@ -61,9 +72,9 @@ public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.MyHo
     }
 
     //接口回调
-    private onItemClickListener monItemClickListener;
-    public void setMonItemClickListener(onItemClickListener monItemClickListener) {
-        this.monItemClickListener = monItemClickListener;
+    private onItemClickListener mOnItemClickListener;
+    public void setOnItemClickListener(onItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
     }
     public interface onItemClickListener{
         void onItemClick(ProductInfo productInfo,int position);

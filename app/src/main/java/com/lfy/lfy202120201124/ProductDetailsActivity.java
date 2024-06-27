@@ -7,15 +7,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lfy.lfy202120201124.entity.ProductInfo;
+
 public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView product_img;
     private TextView product_title;
     private TextView product_price;
     private TextView product_details;
+    private ProductInfo productInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+        //获取传递的数据
+        productInfo = (ProductInfo) getIntent().getSerializableExtra("productInfo");
 
         //返回控件
         findViewById(R.id.toolbar).setOnClickListener(new View.OnClickListener() {
@@ -30,5 +36,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         product_title = findViewById(R.id.product_title);
         product_price = findViewById(R.id.product_price);
         product_details = findViewById(R.id.product_details);
+
+        //设置数据
+        if (null!=productInfo){
+            product_img.setImageResource(productInfo.getProduct_img());
+            product_title.setText(productInfo.getProduct_title());
+            product_details.setText(productInfo.getProduct_details());
+            product_price.setText(productInfo.getProduct_price()+"");
+        }
     }
 }

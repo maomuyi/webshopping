@@ -1,5 +1,6 @@
 package com.lfy.lfy202120201124.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.lfy.lfy202120201124.ProductDetailsActivity;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.LeftListAdapter;
 import com.lfy.lfy202120201124.adapter.RightListAdapter;
 import com.lfy.lfy202120201124.entity.DataService;
+import com.lfy.lfy202120201124.entity.ProductInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,17 @@ public class HomeFragment extends Fragment {
 
         // 默认加载第一个分类
         rightListAdapter.setListData(DataService.getListData(0));
+
+        // RecyclerView点击事件
+        rightListAdapter.setOnItemClickListener(new RightListAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(ProductInfo productInfo, int position) {
+                //跳转传值
+                Intent intent = new Intent(getActivity(),ProductDetailsActivity.class);
+                intent.putExtra("productInfo",productInfo);
+                startActivity(intent);
+            }
+        });
 
         // RecyclerView点击事件
         leftListAdapter.setLeftListOnClickItemLietener(new LeftListAdapter.LeftListOnClickItemLietener() {
