@@ -1,5 +1,6 @@
 package com.lfy.lfy202120201124.adapter;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,7 +24,9 @@ public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.MyHo
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        //加载布局
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.right_list_item,null);
+        return new MyHolder(view);
     }
 
     @Override
