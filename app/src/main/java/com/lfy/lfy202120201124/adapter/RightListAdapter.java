@@ -59,4 +59,13 @@ public class RightListAdapter extends RecyclerView.Adapter<RightListAdapter.MyHo
             product_price = itemView.findViewById(R.id.product_price);
         }
     }
+
+    //接口回调
+    private onItemClickListener monItemClickListener;
+    public void setMonItemClickListener(onItemClickListener monItemClickListener) {
+        this.monItemClickListener = monItemClickListener;
+    }
+    public interface onItemClickListener{
+        void onItemClick(ProductInfo productInfo,int position);
+    }
 }

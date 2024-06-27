@@ -1,6 +1,8 @@
 package com.lfy.lfy202120201124.entity;
 
-public class ProductInfo {
+import java.io.Serializable;
+
+public class ProductInfo implements Serializable {
     private int product_id;
     private int product_img;
     private String product_title;
