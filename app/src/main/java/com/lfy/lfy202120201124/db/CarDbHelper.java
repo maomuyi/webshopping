@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 
 import com.lfy.lfy202120201124.entity.CarInfo;
 
+import java.util.List;
+
 public class CarDbHelper extends SQLiteOpenHelper {
     private static CarDbHelper sHelper;
     private static final String DB_NAME = "car.db";   //数据库名
@@ -111,5 +113,29 @@ public class CarDbHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return carInfo;
+    }
+
+    //根据用户名查询购物车
+    @SuppressLint("Range")
+    public List<CarInfo> queryCarList(String username) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getReadableDatabase();
+        List<CarInfo> list = null;
+        String sql = "select _id,username,product_id,product_img,product_title,product_price,product_count  from car_table where username=?";
+        String[] selectionArgs = {username};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            int car_id = cursor.getInt(cursor.getColumnIndex("_id"));
+            String name = cursor.getString(cursor.getColumnIndex("username"));
+            int productId = cursor.getInt(cursor.getColumnIndex("product_id"));
+            int product_img = cursor.getInt(cursor.getColumnIndex("product_img"));
+            String  product_title = cursor.getString(cursor.getColumnIndex("product_title"));
+            int product_price = cursor.getInt(cursor.getColumnIndex("product_price"));
+            int product_count = cursor.getInt(cursor.getColumnIndex("product_count"));
+            list.add(new CarInfo(car_id, name, productId,product_img, product_title,product_price,product_count));
+        }
+        cursor.close();
+        db.close();
+        return list;
     }
 }
