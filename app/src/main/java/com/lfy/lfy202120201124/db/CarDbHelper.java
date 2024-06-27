@@ -51,20 +51,26 @@ public class CarDbHelper extends SQLiteOpenHelper {
     //购物车添加商品
     public int addCar(String username, int product_id, int product_img, String product_title, String product_price) {
         //判断是否添加过商品。
-        //获取SQLiteDatabase实例
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        //填充占位符
-        values.put("username", username);
-        values.put("product_id", product_id);
-        values.put("product_img", product_img);
-        values.put("product_title", product_title);
-        values.put("product_price", product_price);
-        String nullColumnHack = "values(null,?,?,?,?,?)";
-        //执行
-        int insert = (int) db.insert("car_table", nullColumnHack, values);
-        db.close();
-        return insert;
+        CarInfo addCar = isAddCar(username, product_id);
+        if (addCar==null){
+            //获取SQLiteDatabase实例
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            //填充占位符
+            values.put("username", username);
+            values.put("product_id", product_id);
+            values.put("product_img", product_img);
+            values.put("product_title", product_title);
+            values.put("product_price", product_price);
+            String nullColumnHack = "values(null,?,?,?,?,?)";
+            //执行
+            int insert = (int) db.insert("car_table", nullColumnHack, values);
+            db.close();
+            return insert;
+        }else {
+            return updateProduct(addCar.getCar_id(),addCar);
+        }
+
     }
 
     //修改购物车
