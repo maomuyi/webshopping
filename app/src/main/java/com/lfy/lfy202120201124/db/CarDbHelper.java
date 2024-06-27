@@ -49,7 +49,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
     }
 
     //购物车添加商品
-    public int addCar(String username, int product_id, int product_img, String product_title, String product_price) {
+    public int addCar(String username, int product_id, int product_img, String product_title, int product_price) {
         //判断是否添加过商品。
         CarInfo addCar = isAddCar(username, product_id);
         if (addCar==null){
@@ -62,7 +62,8 @@ public class CarDbHelper extends SQLiteOpenHelper {
             values.put("product_img", product_img);
             values.put("product_title", product_title);
             values.put("product_price", product_price);
-            String nullColumnHack = "values(null,?,?,?,?,?)";
+            values.put("product_count", 1);
+            String nullColumnHack = "values(null,?,?,?,?,?,?)";
             //执行
             int insert = (int) db.insert("car_table", nullColumnHack, values);
             db.close();
@@ -94,7 +95,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
         //获取SQLiteDatabase实例
         SQLiteDatabase db = getReadableDatabase();
         CarInfo carInfo = null;
-        String sql = "select _id,username,product_id,product_img,product_title,product_price  from car_table where username=? and product_id=?";
+        String sql = "select _id,username,product_id,product_img,product_title,product_price,product_count  from car_table where username=? and product_id=?";
         String[] selectionArgs = {username,product_id+""};
         Cursor cursor = db.rawQuery(sql, selectionArgs);
         if (cursor.moveToNext()) {

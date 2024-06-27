@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lfy.lfy202120201124.db.CarDbHelper;
 import com.lfy.lfy202120201124.entity.ProductInfo;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -44,5 +46,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
             product_details.setText(productInfo.getProduct_details());
             product_price.setText(productInfo.getProduct_price()+"");
         }
+
+        //加入购物车
+        findViewById(R.id.addCar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //加入到购物车
+               int row =  CarDbHelper.getInstance(ProductDetailsActivity.this).addCar("lfy",productInfo.getProduct_id(),productInfo.getProduct_img(),productInfo.getProduct_title(),productInfo.getProduct_price());
+                if (row>0){
+                    Toast.makeText(ProductDetailsActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(ProductDetailsActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
