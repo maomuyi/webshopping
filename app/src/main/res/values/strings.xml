@@ -2,4 +2,5 @@
     <string name="app_name">lfy202120201124</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_shopping_cart">购物车</string>
 </resources>
