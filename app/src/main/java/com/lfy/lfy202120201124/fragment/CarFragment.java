@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,10 @@ import android.view.ViewGroup;
 
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.CarListAdapter;
+import com.lfy.lfy202120201124.db.CarDbHelper;
+import com.lfy.lfy202120201124.entity.CarInfo;
+
+import java.util.List;
 
 
 public class CarFragment extends Fragment {
@@ -25,7 +30,6 @@ public class CarFragment extends Fragment {
          rootView= inflater.inflate(R.layout.fragment_car, container, false);
          //初始化控件
         recyclerView = rootView.findViewById(R.id.recyclerView);
-
         return rootView;
     }
 
@@ -36,5 +40,12 @@ public class CarFragment extends Fragment {
         carListAdapter = new CarListAdapter();
         //设置适配器
         recyclerView.setAdapter(carListAdapter);
+        loadData();
+    }
+    public  void  loadData(){
+        //获取数据
+        List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).queryCarList("lfy");
+        //设置数据
+        carListAdapter.setCarInfoList(carInfoList);
     }
 }

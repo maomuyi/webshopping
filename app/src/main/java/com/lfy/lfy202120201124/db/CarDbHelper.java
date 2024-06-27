@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.lfy.lfy202120201124.entity.CarInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarDbHelper extends SQLiteOpenHelper {
@@ -120,7 +121,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
     public List<CarInfo> queryCarList(String username) {
         //获取SQLiteDatabase实例
         SQLiteDatabase db = getReadableDatabase();
-        List<CarInfo> list = null;
+        List<CarInfo> list = new ArrayList<>();;
         String sql = "select _id,username,product_id,product_img,product_title,product_price,product_count  from car_table where username=?";
         String[] selectionArgs = {username};
         Cursor cursor = db.rawQuery(sql, selectionArgs);

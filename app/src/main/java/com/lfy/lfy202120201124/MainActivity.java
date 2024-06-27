@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.content,carFragment);
             }else {
                 fragmentTransaction.show(carFragment);
+                carFragment.loadData();
             }
             
         } else if (position==2) {
