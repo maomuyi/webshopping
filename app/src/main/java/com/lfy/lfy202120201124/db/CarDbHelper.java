@@ -27,7 +27,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //创建car_table表
-        db.execSQL("create table car_table(car_id integer primary key autoincrement, " +
+        db.execSQL("create table car_table(_id integer primary key autoincrement, " +
                 "username text," +
                 "product_id text," +
                 "product_img integer," +
@@ -61,4 +61,20 @@ public class CarDbHelper extends SQLiteOpenHelper {
         db.close();
         return insert;
     }
+
+    //修改购物车
+    public int updatePwd(int car_id) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getWritableDatabase();
+        // 填充占位符
+        ContentValues values = new ContentValues();
+        values.put("_id", car_id);
+        // 执行SQL
+        int update = db.update("car_table", values, " _id=?", new String[]{car_id+""});
+        // 关闭数据库连接
+        db.close();
+        return update;
+
+    }
+    //根据用户名和商品ID判断有没有添加过商品
 }
