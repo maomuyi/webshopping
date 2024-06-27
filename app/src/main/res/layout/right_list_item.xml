@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/product_img"
-            android:layout_width="100dp"
-            android:src="@mipmap/dt990pro"
-            android:scaleType="centerCrop"
-            android:layout_height="100dp"/>
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/product_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textColor="#333"
-                android:text="xxx"/>
-            <TextView
-                android:id="@+id/product_details"
-                android:layout_marginTop="10dp"
-                android:textSize="12sp"
-                android:maxLines="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="xxx "/>
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/baseline_currency_yen_24"/>
-                <TextView
-                    android:id="@+id/product_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="1000"
-                    android:textStyle="bold"
-                    android:textColor="#FF6D00"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
 
+    <ImageView
+        android:id="@+id/product_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/dt990pro"
+         />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#333"
+            android:text="xxx"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/product_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:text="xxx"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_currency_yen_24" />
+
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textColor="#FF6D00"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 </androidx.appcompat.widget.LinearLayoutCompat>
