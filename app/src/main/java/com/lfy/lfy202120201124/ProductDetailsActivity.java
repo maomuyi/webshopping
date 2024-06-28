@@ -2,6 +2,8 @@ package com.lfy.lfy202120201124;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,13 +56,29 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 UserInfo userInfo = UserInfo.getUserInfo();
                 if (userInfo!=null){
-                    //加入到购物车
-                    int row =  CarDbHelper.getInstance(ProductDetailsActivity.this).addCar(userInfo.getUsername(),productInfo.getProduct_id(),productInfo.getProduct_img(),productInfo.getProduct_title(),productInfo.getProduct_price());
-                    if (row>0){
-                        Toast.makeText(ProductDetailsActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(ProductDetailsActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
-                    }
+                    new AlertDialog.Builder(ProductDetailsActivity.this)
+                            .setTitle("是否加入购物车")
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //加入到购物车
+                                    int row =  CarDbHelper.getInstance(ProductDetailsActivity.this).addCar(userInfo.getUsername(),productInfo.getProduct_id(),productInfo.getProduct_img(),productInfo.getProduct_title(),productInfo.getProduct_price());
+                                    if (row>0){
+                                        Toast.makeText(ProductDetailsActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }else {
+                                        Toast.makeText(ProductDetailsActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+
                 }
 
             }

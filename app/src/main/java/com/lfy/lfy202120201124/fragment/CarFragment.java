@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,6 +105,11 @@ public class CarFragment extends Fragment {
                         Toast.makeText(getActivity(), "什么都没有！", Toast.LENGTH_SHORT).show();
                     }else {
                         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pay_dialog_layout, null);
+                        EditText et_phone = view.findViewById(R.id.et_phone);
+                        EditText et_address = view.findViewById(R.id.et_address);
+                        TextView tv_total = view.findViewById(R.id.tv_total);
+                        tv_total.setText(total.getText().toString());
+
                         new AlertDialog.Builder(getActivity())
                                 .setTitle("支付详情")
                                 .setView(view)
@@ -112,21 +119,29 @@ public class CarFragment extends Fragment {
 
                                     }
                                 })
-                                .setPositiveButton("确认支付", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        String address = et_address.getText().toString();
+                                        String phone = et_phone.getText().toString();
+                                        if (TextUtils.isEmpty(address) || TextUtils.isEmpty(phone)){
+                                            Toast.makeText(getActivity(), "请填写完整", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            //生成订单
+                                           OrderDbHelper.getInstance(getActivity()).insertByAll(carList,address,phone);
+                                            //清除购物车
+                                            for (int i =0;i<carList.size();i++){
+                                             CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
+                                             }
+                                            //重新加载页面
+                                            loadData();
+                                            Toast.makeText(getActivity(), "支付成功", Toast.LENGTH_SHORT).show();
+                                        }
 
                                     }
                                 })
                                 .show();
-//                        //生成订单
-//                        OrderDbHelper.getInstance(getActivity()).insertByAll(carList,"四川内江","13113333");
-//                        //清除购物车
-//                        for (int i =0;i<carList.size();i++){
-//                            CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
-//                        }
-//                        //重新加载页面
-//                        loadData();
+
                     }
                 }
 
