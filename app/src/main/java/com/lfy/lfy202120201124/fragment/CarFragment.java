@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.CarListAdapter;
 import com.lfy.lfy202120201124.db.CarDbHelper;
+import com.lfy.lfy202120201124.db.OrderDbHelper;
 import com.lfy.lfy202120201124.entity.CarInfo;
 import com.lfy.lfy202120201124.entity.UserInfo;
 
@@ -93,6 +94,19 @@ public class CarFragment extends Fragment {
         btn_total.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //批量将购物车里面的数据生成订单
+                UserInfo userInfo = UserInfo.getUserInfo();
+                if (null !=  userInfo){
+                    List<CarInfo> carList= CarDbHelper.getInstance(getActivity()).queryCarList(userInfo.getUsername());
+                    //生成订单
+                    OrderDbHelper.getInstance(getActivity()).insertByAll(carList,"四川内江","13113333");
+                    //清除购物车
+                    for (int i =0;i<carList.size();i++){
+                        CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
+                    }
+                    //重新加载页面
+                    loadData();
+                }
 
             }
         });
