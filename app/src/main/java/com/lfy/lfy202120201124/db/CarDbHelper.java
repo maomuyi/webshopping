@@ -19,7 +19,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "car.db";   //数据库名
     private static final int VERSION = 1;    //版本号
 
-    //必须实现其中一个构方法
+    //必须实现其中一个方法
     public CarDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
