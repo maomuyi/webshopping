@@ -91,8 +91,9 @@ public class OrderDbHelper extends SQLiteOpenHelper {
         //获取SQLiteDatabase实例
         SQLiteDatabase db = getReadableDatabase();
         List<OrderInfo> list = new ArrayList<>();
-        String sql = "select order_id,username,product_img,product_title,product_price,product_count,address,phone  from order_table";
-        Cursor cursor = db.rawQuery(sql, null);
+        String sql = "select order_id,username,product_img,product_title,product_price,product_count,address,phone  from order_table where username=?";
+        String[] selectionArgs ={username};
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
         while (cursor.moveToNext()) {
             int order_id = cursor.getInt(cursor.getColumnIndex("order_id"));
             String userName = cursor.getString(cursor.getColumnIndex("username"));
