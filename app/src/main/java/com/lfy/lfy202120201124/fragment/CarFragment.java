@@ -102,14 +102,31 @@ public class CarFragment extends Fragment {
                     if (carList.size()==0){
                         Toast.makeText(getActivity(), "什么都没有！", Toast.LENGTH_SHORT).show();
                     }else {
-                        //生成订单
-                        OrderDbHelper.getInstance(getActivity()).insertByAll(carList,"四川内江","13113333");
-                        //清除购物车
-                        for (int i =0;i<carList.size();i++){
-                            CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
-                        }
-                        //重新加载页面
-                        loadData();
+                        View view = LayoutInflater.from(getActivity()).inflate(R.layout.pay_dialog_layout, null);
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("支付详情")
+                                .setView(view)
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setPositiveButton("确认支付", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .show();
+//                        //生成订单
+//                        OrderDbHelper.getInstance(getActivity()).insertByAll(carList,"四川内江","13113333");
+//                        //清除购物车
+//                        for (int i =0;i<carList.size();i++){
+//                            CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
+//                        }
+//                        //重新加载页面
+//                        loadData();
                     }
                 }
 

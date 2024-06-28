@@ -61,7 +61,7 @@ public class OrderFragment extends Fragment {
 
                             }
                         })
-                        .setNegativeButton("确认", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 int row = OrderDbHelper.getInstance(getActivity()).delete(orderInfo.getOrder_id() + "");
