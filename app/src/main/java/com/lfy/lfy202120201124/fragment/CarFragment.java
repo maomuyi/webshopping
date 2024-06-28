@@ -19,6 +19,7 @@ import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.CarListAdapter;
 import com.lfy.lfy202120201124.db.CarDbHelper;
 import com.lfy.lfy202120201124.entity.CarInfo;
+import com.lfy.lfy202120201124.entity.UserInfo;
 
 import java.util.List;
 
@@ -107,11 +108,15 @@ public class CarFragment extends Fragment {
         total.setText(totalCount+".00");
     }
     public  void  loadData(){
-        //获取数据
-        List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).queryCarList("dq");
-        //设置数据
-        carListAdapter.setCarInfoList(carInfoList);
-        //计算总价
-        setTotalData(carInfoList);
+        UserInfo userInfo = UserInfo.getUserInfo();
+        if (userInfo!=null){
+            //获取数据
+            List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).queryCarList(userInfo.getUsername());
+            //设置数据
+            carListAdapter.setCarInfoList(carInfoList);
+            //计算总价
+            setTotalData(carInfoList);
+        }
+
     }
 }

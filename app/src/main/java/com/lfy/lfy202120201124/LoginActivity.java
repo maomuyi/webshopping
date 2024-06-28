@@ -74,6 +74,10 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("username",username);
                             editor.putString("password",password);
                             editor.commit();
+
+                            //保存用户名和密码
+                            UserInfo.setUserInfo(login);
+
                             //登录成功
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);

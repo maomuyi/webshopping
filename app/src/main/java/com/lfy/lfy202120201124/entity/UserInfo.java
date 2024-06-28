@@ -6,6 +6,15 @@ public class UserInfo {
     private String username;
     private String password;
     private String nickname;
+    public  static UserInfo userInfo;
+
+    public static UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public static void setUserInfo(UserInfo userInfo) {
+        UserInfo.userInfo = userInfo;
+    }
 
     public UserInfo(int user_id, String username, String password, String nickname) {
         this.user_id = user_id;

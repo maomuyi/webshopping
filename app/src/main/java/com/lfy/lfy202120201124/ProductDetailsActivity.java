@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.lfy.lfy202120201124.db.CarDbHelper;
 import com.lfy.lfy202120201124.entity.ProductInfo;
+import com.lfy.lfy202120201124.entity.UserInfo;
 
 public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView product_img;
@@ -51,13 +52,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         findViewById(R.id.addCar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //加入到购物车
-               int row =  CarDbHelper.getInstance(ProductDetailsActivity.this).addCar("dq",productInfo.getProduct_id(),productInfo.getProduct_img(),productInfo.getProduct_title(),productInfo.getProduct_price());
-                if (row>0){
-                    Toast.makeText(ProductDetailsActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(ProductDetailsActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                UserInfo userInfo = UserInfo.getUserInfo();
+                if (userInfo!=null){
+                    //加入到购物车
+                    int row =  CarDbHelper.getInstance(ProductDetailsActivity.this).addCar(userInfo.getUsername(),productInfo.getProduct_id(),productInfo.getProduct_img(),productInfo.getProduct_title(),productInfo.getProduct_price());
+                    if (row>0){
+                        Toast.makeText(ProductDetailsActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(ProductDetailsActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
     }
