@@ -52,6 +52,8 @@ public class CarFragment extends Fragment {
             @Override
             public void onSubTractOnClick(CarInfo carInfo, int position) {
                 //减
+                CarDbHelper.getInstance(getActivity()).subStartUpdateProduct(carInfo.getCar_id(),carInfo);
+                loadData();
             }
         });
 

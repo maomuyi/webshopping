@@ -92,6 +92,24 @@ public class CarDbHelper extends SQLiteOpenHelper {
 
     }
 
+    //减少购物车
+    public int subStartUpdateProduct(int car_id, CarInfo carInfo) {
+        if (carInfo.getProduct_count()>=2){
+            //获取SQLiteDatabase实例
+            SQLiteDatabase db = getWritableDatabase();
+            // 填充占位符
+            ContentValues values = new ContentValues();
+            values.put("product_count", carInfo.getProduct_count()-1);
+            // 执行SQL
+            int update = db.update("car_table", values, " _id=?", new String[]{car_id+""});
+            // 关闭数据库连接
+            db.close();
+            return update;
+        }
+        return 0;
+
+    }
+
     //根据用户名和商品ID判断有没有添加过商品到购物车
     @SuppressLint("Range")
     public CarInfo isAddCar(String username,int product_id) {
