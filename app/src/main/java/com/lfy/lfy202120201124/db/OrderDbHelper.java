@@ -1,14 +1,18 @@
 package com.lfy.lfy202120201124.db;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 import com.lfy.lfy202120201124.entity.CarInfo;
+import com.lfy.lfy202120201124.entity.OrderInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDbHelper extends SQLiteOpenHelper {
@@ -79,5 +83,29 @@ public class OrderDbHelper extends SQLiteOpenHelper {
         //关闭数据库
         db.close();
 
+    }
+
+    //获取所有订单数据
+    @SuppressLint("Range")
+    public List<OrderInfo> queryOrderListData(String username) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getReadableDatabase();
+        List<OrderInfo> list = new ArrayList<>();
+        String sql = "select order_id,username,product_img,product_title,product_price,product_count,address,phone  from order_table";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int order_id = cursor.getInt(cursor.getColumnIndex("order_id"));
+            String userName = cursor.getString(cursor.getColumnIndex("username"));
+            int product_img = cursor.getInt(cursor.getColumnIndex("product_img"));
+            String product_title = cursor.getString(cursor.getColumnIndex("product_title"));
+            int product_price = cursor.getInt(cursor.getColumnIndex("product_price"));
+            int product_count = cursor.getInt(cursor.getColumnIndex("product_count"));
+            String address = cursor.getString(cursor.getColumnIndex("address"));
+            String phone = cursor.getString(cursor.getColumnIndex("phone"));
+            list.add(new OrderInfo(order_id, userName, product_img, product_title,product_price,product_count,address,phone));
+        }
+        cursor.close();
+        db.close();
+        return list;
     }
 }
