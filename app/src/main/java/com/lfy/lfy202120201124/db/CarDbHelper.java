@@ -157,4 +157,15 @@ public class CarDbHelper extends SQLiteOpenHelper {
         db.close();
         return list;
     }
+
+    //删除购物车
+    public int delete(String car_id) {
+        //获取SQLiteDatabase实例
+        SQLiteDatabase db = getWritableDatabase();
+        // 执行SQL
+        int delete = db.delete("car_table", " _id=?", new String[]{car_id});
+        // 关闭数据库连接
+        db.close();
+        return delete;
+    }
 }

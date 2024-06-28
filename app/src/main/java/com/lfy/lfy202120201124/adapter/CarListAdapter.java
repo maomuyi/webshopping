@@ -32,33 +32,37 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        //绑定数据
+        // 绑定数据
         CarInfo carInfo = carInfoList.get(position);
         holder.product_img.setImageResource(carInfo.getProduct_img());
         holder.product_title.setText(carInfo.getProduct_title());
-        holder.product_price.setText(carInfo.getProduct_price()+"");
-        holder.product_count.setText(carInfo.getProduct_count()+"");
+        holder.product_price.setText(carInfo.getProduct_price() + "");
+        holder.product_count.setText(carInfo.getProduct_count() + "");
 
-        //点击事件
-        holder.btn_subtract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null!=mOnItemClickListener){
-                    mOnItemClickListener.onSubTractOnClick(carInfo,position);
-                }
-
-            }
-        });
-        holder.btn_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null!=mOnItemClickListener){
-                    mOnItemClickListener.onPlusOnClick(carInfo,position);
-                }
+        // 点击事件
+        holder.btn_subtract.setOnClickListener(v -> {
+            int currentPosition = holder.getAdapterPosition();
+            if (mOnItemClickListener != null && currentPosition != RecyclerView.NO_POSITION) {
+                mOnItemClickListener.onSubTractOnClick(carInfoList.get(currentPosition), currentPosition);
             }
         });
 
+        holder.btn_plus.setOnClickListener(v -> {
+            int currentPosition = holder.getAdapterPosition();
+            if (mOnItemClickListener != null && currentPosition != RecyclerView.NO_POSITION) {
+                mOnItemClickListener.onPlusOnClick(carInfoList.get(currentPosition), currentPosition);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            int currentPosition = holder.getAdapterPosition();
+            if (mOnItemClickListener != null && currentPosition != RecyclerView.NO_POSITION) {
+                mOnItemClickListener.delOnClick(carInfoList.get(currentPosition), currentPosition);
+            }
+            return true;
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -95,5 +99,6 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyHolder
     public interface onItemClickListener{
         void onPlusOnClick(CarInfo carInfo,int position);
         void onSubTractOnClick(CarInfo carInfo,int position);
+        void delOnClick(CarInfo carInfo,int position);
     }
 }

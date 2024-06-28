@@ -1,5 +1,7 @@
 package com.lfy.lfy202120201124.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -61,6 +63,30 @@ public class CarFragment extends Fragment {
                 CarDbHelper.getInstance(getActivity()).subStartUpdateProduct(carInfo.getCar_id(),carInfo);
                 loadData();
             }
+
+            @Override
+            public void delOnClick(CarInfo carInfo, int position) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("危险警告")
+                                .setMessage("你真的想好了吗，真的要离开我吗")
+                                        .setPositiveButton("就这样吧", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                CarDbHelper.getInstance(getActivity()).delete(carInfo.getCar_id()+" ");
+                                                loadData();
+                                            }
+                                        })
+                                                .setNegativeButton("不要~", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+
+                                                    }
+                                                })
+                        .show();
+
+            }
+
+
         });
         //点击结算
         btn_total.setOnClickListener(new View.OnClickListener() {
