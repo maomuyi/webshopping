@@ -17,6 +17,11 @@ import java.util.List;
 
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyHolder> {
     private List<OrderInfo> orderInfoList = new ArrayList<>();
+
+    public void setListData(List<OrderInfo> list){
+        this.orderInfoList = list;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
