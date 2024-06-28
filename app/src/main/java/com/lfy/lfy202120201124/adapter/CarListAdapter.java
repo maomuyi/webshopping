@@ -39,6 +39,25 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyHolder
         holder.product_price.setText(carInfo.getProduct_price()+"");
         holder.product_count.setText(carInfo.getProduct_count()+"");
 
+        //点击事件
+        holder.btn_subtract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null!=mOnItemClickListener){
+                    mOnItemClickListener.onSubTractOnClick(carInfo,position);
+                }
+
+            }
+        });
+        holder.btn_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null!=mOnItemClickListener){
+                    mOnItemClickListener.onPlusOnClick(carInfo,position);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -51,6 +70,8 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyHolder
         TextView product_title;
         TextView product_price;
         TextView product_count;
+        TextView btn_subtract;
+        TextView btn_plus;
 
         public MyHolder(@NonNull View itemView) {
 
@@ -59,6 +80,20 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.MyHolder
             product_title = itemView.findViewById(R.id.product_title);
             product_price = itemView.findViewById(R.id.product_price);
             product_count = itemView.findViewById(R.id.product_count);
+            btn_subtract = itemView.findViewById(R.id.btn_subtract);
+            btn_plus = itemView.findViewById(R.id.btn_plus);
         }
+    }
+
+    //回调函数
+    private onItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(onItemClickListener OnItemClickListener) {
+        mOnItemClickListener = OnItemClickListener;
+    }
+
+    public interface onItemClickListener{
+        void onPlusOnClick(CarInfo carInfo,int position);
+        void onSubTractOnClick(CarInfo carInfo,int position);
     }
 }

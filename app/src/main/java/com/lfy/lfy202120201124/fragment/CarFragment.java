@@ -40,6 +40,20 @@ public class CarFragment extends Fragment {
         carListAdapter = new CarListAdapter();
         //设置适配器
         recyclerView.setAdapter(carListAdapter);
+        //recyclerView点击事件
+        carListAdapter.setOnItemClickListener(new CarListAdapter.onItemClickListener() {
+            @Override
+            public void onPlusOnClick(CarInfo carInfo, int position) {
+                //加
+                CarDbHelper.getInstance(getActivity()).updateProduct(carInfo.getCar_id(),carInfo);
+                loadData();
+            }
+
+            @Override
+            public void onSubTractOnClick(CarInfo carInfo, int position) {
+                //减
+            }
+        });
 
         loadData();
     }
