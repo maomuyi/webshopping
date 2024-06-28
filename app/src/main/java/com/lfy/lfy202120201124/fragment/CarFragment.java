@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.CarListAdapter;
@@ -23,6 +25,8 @@ public class CarFragment extends Fragment {
     private View rootView;
     private RecyclerView recyclerView;
     private CarListAdapter carListAdapter;
+    private Button btn_total;
+    private TextView total;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class CarFragment extends Fragment {
          rootView= inflater.inflate(R.layout.fragment_car, container, false);
          //初始化控件
         recyclerView = rootView.findViewById(R.id.recyclerView);
+        total = rootView.findViewById(R.id.total);
+        btn_total = rootView.findViewById(R.id.btn_total);
         return rootView;
     }
 
@@ -56,13 +62,30 @@ public class CarFragment extends Fragment {
                 loadData();
             }
         });
+        //点击结算
+        btn_total.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         loadData();
+    }
+    private void setTotalData(List<CarInfo> list){
+        int totalCount = 0;
+        for (int i= 0;i< list.size();i++){
+            int price =list.get(i).getProduct_price()*list.get(i).getProduct_count();
+            totalCount=totalCount+price;
+        }
+        total.setText(totalCount+".00");
     }
     public  void  loadData(){
         //获取数据
         List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).queryCarList("dq");
         //设置数据
         carListAdapter.setCarInfoList(carInfoList);
+        //计算总价
+        setTotalData(carInfoList);
     }
 }
