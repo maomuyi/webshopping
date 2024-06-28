@@ -38,6 +38,17 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyHo
         holder.product_img.setImageResource(orderInfo.getProduct_img());
         holder.product_title.setText(orderInfo.getProduct_title());
         holder.product_price.setText(orderInfo.getProduct_price()+"");
+
+        //长按删除
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (null!= onItemClickListener){
+                    onItemClickListener.onItemClick(orderInfo,position);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -59,6 +70,13 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyHo
         }
 
     }
+    private onItemClickListener onItemClickListener;
 
+    public void setOnItemClickListener(onItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
+    public interface onItemClickListener{
+        void onItemClick(OrderInfo orderInfo,int position);
+    }
 }

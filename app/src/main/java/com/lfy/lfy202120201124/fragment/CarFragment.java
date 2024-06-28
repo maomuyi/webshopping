@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.adapter.CarListAdapter;
@@ -98,14 +99,18 @@ public class CarFragment extends Fragment {
                 UserInfo userInfo = UserInfo.getUserInfo();
                 if (null !=  userInfo){
                     List<CarInfo> carList= CarDbHelper.getInstance(getActivity()).queryCarList(userInfo.getUsername());
-                    //生成订单
-                    OrderDbHelper.getInstance(getActivity()).insertByAll(carList,"四川内江","13113333");
-                    //清除购物车
-                    for (int i =0;i<carList.size();i++){
-                        CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
+                    if (carList.size()==0){
+                        Toast.makeText(getActivity(), "什么都没有！", Toast.LENGTH_SHORT).show();
+                    }else {
+                        //生成订单
+                        OrderDbHelper.getInstance(getActivity()).insertByAll(carList,"四川内江","13113333");
+                        //清除购物车
+                        for (int i =0;i<carList.size();i++){
+                            CarDbHelper.getInstance(getActivity()).delete(carList.get(i).getCar_id()+"");
+                        }
+                        //重新加载页面
+                        loadData();
                     }
-                    //重新加载页面
-                    loadData();
                 }
 
             }

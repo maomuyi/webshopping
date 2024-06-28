@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.content,searchFragment);
             }else {
                 fragmentTransaction.show(searchFragment);
+                orderFragment.loadData();
             }
             
         } else if (position==3) {
