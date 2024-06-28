@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -43,6 +44,8 @@ public class OrderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         //初始化orderListAdapter
         orderListAdapter =new OrderListAdapter();
+        // 设置LayoutManager
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //设置orderListAdapter
         recyclerView.setAdapter(orderListAdapter);
         //orderListAdapter点击事件

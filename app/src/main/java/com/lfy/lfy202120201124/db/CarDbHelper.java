@@ -67,7 +67,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             String nullColumnHack = "values(null,?,?,?,?,?,?)";
             //执行
             int insert = (int) db.insert("car_table", nullColumnHack, values);
-            db.close();
+            //db.close();
             return insert;
         }else {
             return updateProduct(addCar.getCar_id(),addCar);
@@ -85,7 +85,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
         // 执行SQL
         int update = db.update("car_table", values, " _id=?", new String[]{car_id+""});
         // 关闭数据库连接
-        db.close();
+        //db.close();
         return update;
 
     }
@@ -101,7 +101,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             // 执行SQL
             int update = db.update("car_table", values, " _id=?", new String[]{car_id+""});
             // 关闭数据库连接
-            db.close();
+            //db.close();
             return update;
         }
         return 0;
@@ -128,7 +128,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             carInfo = new CarInfo(car_id, name, productId,product_img, product_title,product_price,product_count);
         }
         cursor.close();
-        db.close();
+        //db.close();
         return carInfo;
     }
 
@@ -152,7 +152,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
             list.add(new CarInfo(car_id, name, productId,product_img, product_title,product_price,product_count));
         }
         cursor.close();
-        db.close();
+        //db.close();
         return list;
     }
 
@@ -163,7 +163,7 @@ public class CarDbHelper extends SQLiteOpenHelper {
         // 执行SQL
         int delete = db.delete("car_table", " _id=?", new String[]{car_id});
         // 关闭数据库连接
-        db.close();
+        //db.close();
         return delete;
     }
 }
