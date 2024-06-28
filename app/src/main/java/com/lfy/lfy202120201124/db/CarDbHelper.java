@@ -42,8 +42,6 @@ public class CarDbHelper extends SQLiteOpenHelper {
                 "product_price integer," +
                 "product_count integer" +
                 ")");
-
-
     }
 
     @Override
