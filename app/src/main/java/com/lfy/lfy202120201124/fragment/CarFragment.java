@@ -40,11 +40,12 @@ public class CarFragment extends Fragment {
         carListAdapter = new CarListAdapter();
         //设置适配器
         recyclerView.setAdapter(carListAdapter);
+
         loadData();
     }
     public  void  loadData(){
         //获取数据
-        List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).queryCarList("lfy");
+        List<CarInfo> carInfoList = CarDbHelper.getInstance(getActivity()).queryCarList("dq");
         //设置数据
         carListAdapter.setCarInfoList(carInfoList);
     }

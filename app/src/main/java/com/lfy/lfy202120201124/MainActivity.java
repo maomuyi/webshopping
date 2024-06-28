@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.content,carFragment);
             }else {
                 fragmentTransaction.show(carFragment);
+                //刷新数据
                 carFragment.loadData();
             }
             
