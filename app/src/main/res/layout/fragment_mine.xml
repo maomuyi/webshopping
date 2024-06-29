@@ -164,6 +164,7 @@
             />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/about"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_width="match_parent"

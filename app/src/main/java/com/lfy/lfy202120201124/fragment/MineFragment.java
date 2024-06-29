@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lfy.lfy202120201124.AboutActivity;
 import com.lfy.lfy202120201124.LoginActivity;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.UpdatePwdActivity;
@@ -71,7 +72,14 @@ public class MineFragment extends Fragment {
             }
         });
 
-
+        //关于app
+        rootView.findViewById(R.id.about).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
