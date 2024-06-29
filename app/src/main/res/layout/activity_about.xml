@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".AboutActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/my_light_primary"
+        app:navigationIcon="@drawable/baseline_backspace_24"
+        app:titleTextColor="@color/white"
+        app:title="关于APP"/>
+    <ImageView
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/app_logo"/>
+    <TextView
+        android:layout_margin="10dp"
+        android:lineSpacingExtra="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="在卯木音域，我们致力于为您打造一个安全、便捷的购物环境。我们采用先进的支付系统和严格的物流监控，确保您的交易安全无误，让您购物无忧。同时，我们还提供优质的售后服务，让您在享受音乐的同时，也能享受到贴心的关怀。"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
