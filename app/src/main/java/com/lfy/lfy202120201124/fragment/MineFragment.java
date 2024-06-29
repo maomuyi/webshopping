@@ -1,5 +1,8 @@
 package com.lfy.lfy202120201124.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lfy.lfy202120201124.LoginActivity;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.entity.UserInfo;
 
@@ -28,6 +32,34 @@ public class MineFragment extends Fragment {
         //初始化控件
         tv_username = rootView.findViewById(R.id.tv_username);
         tv_nickname= rootView.findViewById(R.id.tv_nickname);
+
+        //退出登录
+        rootView.findViewById(R.id.exit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("危险！危险！红温警告！")
+                        .setMessage("真的想好要我离开了吗？")
+                        .setNegativeButton("不离开了", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("相忘于江湖", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //退出
+                                getActivity().finish();
+                                //跳转登录
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+
+                        .show();
+            }
+        });
 
         return rootView;
     }

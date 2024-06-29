@@ -188,6 +188,7 @@
     </RelativeLayout>
     
         <TextView
+            android:id="@+id/exit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
