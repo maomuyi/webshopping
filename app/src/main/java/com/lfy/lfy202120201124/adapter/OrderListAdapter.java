@@ -38,6 +38,8 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyHo
         holder.product_img.setImageResource(orderInfo.getProduct_img());
         holder.product_title.setText(orderInfo.getProduct_title());
         holder.product_price.setText(orderInfo.getProduct_price()+"");
+        //设置地址
+        holder.address.setText("["+orderInfo.getAddress()+"] ;联系方式："+orderInfo.getPhone());
 
         //长按删除
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -61,12 +63,14 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.MyHo
         TextView product_title;
         TextView product_price;
         TextView product_count;
+        TextView address;
         public MyHolder (@NonNull View itemView){
             super(itemView);
             product_img = itemView.findViewById(R.id.product_img);
             product_title = itemView.findViewById(R.id.product_title);
             product_price = itemView.findViewById(R.id.product_price);
             product_count = itemView.findViewById(R.id.product_count);
+            address = itemView.findViewById(R.id.address);
         }
 
     }
