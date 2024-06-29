@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.lfy.lfy202120201124.LoginActivity;
 import com.lfy.lfy202120201124.R;
+import com.lfy.lfy202120201124.UpdatePwdActivity;
 import com.lfy.lfy202120201124.entity.UserInfo;
 
 public class MineFragment extends Fragment {
@@ -61,6 +62,16 @@ public class MineFragment extends Fragment {
             }
         });
 
+        //修改密码
+        rootView.findViewById(R.id.updatePwd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), UpdatePwdActivity.class);
+                startActivityForResult(intent,1000);
+            }
+        });
+
+
         return rootView;
     }
 
@@ -74,6 +85,16 @@ public class MineFragment extends Fragment {
             tv_username.setText(userInfo.getUsername());
             tv_nickname.setText(userInfo.getNickname());
 
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode ==1000){
+            getActivity().finish();
+            Intent intent = new Intent(getActivity(),LoginActivity.class);
+            startActivity(intent);
         }
     }
 }
