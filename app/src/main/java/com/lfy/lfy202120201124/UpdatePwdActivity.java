@@ -54,5 +54,11 @@ public class UpdatePwdActivity extends AppCompatActivity {
         });
 
         //返回页面
+        findViewById(R.id.toobar_xg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

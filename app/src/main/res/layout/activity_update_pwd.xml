@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".UpdatePwdActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toobar"
+        android:id="@+id/toobar_xg"
         android:layout_width="match_parent"
         app:title="修改密码"
         app:titleTextColor="@color/white"
