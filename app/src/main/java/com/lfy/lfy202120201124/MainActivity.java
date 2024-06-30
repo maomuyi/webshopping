@@ -74,14 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 //刷新数据
                 carFragment.loadData();
             }
-            
+
         } else if (position==2) {
             if (searchFragment ==null){
                 searchFragment=new SearchFragment();
                 fragmentTransaction.add(R.id.content,searchFragment);
             }else {
                 fragmentTransaction.show(searchFragment);
-                orderFragment.loadData();
+                if (searchFragment != null) {
+                    searchFragment.loadData();
+                }
             }
             
         } else if (position==3) {

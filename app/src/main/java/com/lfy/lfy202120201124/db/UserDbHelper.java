@@ -14,7 +14,7 @@ import com.lfy.lfy202120201124.entity.UserInfo;
 public class UserDbHelper extends SQLiteOpenHelper {
     private static UserDbHelper sHelper;
     private static final String DB_NAME = "user.db";   //数据库名
-    private static final int VERSION = 1;    //版本号
+    private static final int VERSION = 2;    //版本号
 
     //必须实现其中一个构方法
     public UserDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
