@@ -25,6 +25,7 @@ import java.util.List;
 
 public class OrderFragment extends Fragment {
 //TOOD:订单总金额
+    //不能多个商品结算
     private View rootView;
     private RecyclerView recyclerView;
     private OrderListAdapter orderListAdapter;
