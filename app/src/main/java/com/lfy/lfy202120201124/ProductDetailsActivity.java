@@ -52,7 +52,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             product_img.setImageResource(productInfo.getProduct_img());
             product_title.setText(productInfo.getProduct_title());
             product_details.setText(productInfo.getProduct_details());
-            product_price.setText(productInfo.getProduct_price() + "");
+            product_price.setText(String.valueOf(productInfo.getProduct_price()));
         }
 
         //检查收藏状态
@@ -87,9 +87,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 }
                             })
                             .show();
-
                 }
-
             }
         });
 
@@ -98,7 +96,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isFavorite = !isFavorite;
-                FavoriteDbHelper.getInstance(ProductDetailsActivity.this).setFavorite(productInfo.getProduct_id(), isFavorite);
+                FavoriteDbHelper.getInstance(ProductDetailsActivity.this).setFavorite(
+                        productInfo.getProduct_id(), isFavorite, productInfo.getProduct_img(),
+                        productInfo.getProduct_title(), productInfo.getProduct_price()
+                );
                 updateFavoriteIcon();
                 Toast.makeText(ProductDetailsActivity.this, isFavorite ? "收藏成功" : "取消收藏", Toast.LENGTH_SHORT).show();
             }

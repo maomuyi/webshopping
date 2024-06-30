@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lfy.lfy202120201124.AboutActivity;
+import com.lfy.lfy202120201124.FavoritesActivity;
 import com.lfy.lfy202120201124.LoginActivity;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.UpdatePwdActivity;
@@ -29,11 +30,11 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       rootView =  inflater.inflate(R.layout.fragment_mine, container, false);
+        rootView = inflater.inflate(R.layout.fragment_mine, container, false);
 
         //初始化控件
         tv_username = rootView.findViewById(R.id.tv_username);
-        tv_nickname= rootView.findViewById(R.id.tv_nickname);
+        tv_nickname = rootView.findViewById(R.id.tv_nickname);
 
         //退出登录
         rootView.findViewById(R.id.exit).setOnClickListener(new View.OnClickListener() {
@@ -58,7 +59,6 @@ public class MineFragment extends Fragment {
                                 startActivity(intent);
                             }
                         })
-
                         .show();
             }
         });
@@ -68,7 +68,7 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), UpdatePwdActivity.class);
-                startActivityForResult(intent,1000);
+                startActivityForResult(intent, 1000);
             }
         });
 
@@ -76,10 +76,20 @@ public class MineFragment extends Fragment {
         rootView.findViewById(R.id.about).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  intent = new Intent(getActivity(), AboutActivity.class);
+                Intent intent = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intent);
             }
         });
+
+        //我的收藏
+        rootView.findViewById(R.id.my_favorites).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FavoritesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
@@ -89,19 +99,18 @@ public class MineFragment extends Fragment {
 
         //设置用户数据
         UserInfo userInfo = UserInfo.getUserInfo();
-        if (null!= userInfo){
+        if (null != userInfo) {
             tv_username.setText(userInfo.getUsername());
             tv_nickname.setText(userInfo.getNickname());
-
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode ==1000){
+        if (resultCode == 1000) {
             getActivity().finish();
-            Intent intent = new Intent(getActivity(),LoginActivity.class);
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }
     }

@@ -17,6 +17,7 @@ public class ProductInfo implements Serializable {
         this.product_price = product_price;
     }
 
+    // Getter and Setter methods
     public int getProduct_id() {
         return product_id;
     }
