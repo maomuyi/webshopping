@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.lfy.lfy202120201124.AboutActivity;
 import com.lfy.lfy202120201124.FavoritesActivity;
 import com.lfy.lfy202120201124.LoginActivity;
+import com.lfy.lfy202120201124.PrivacyPolicyActivity;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.UpdatePwdActivity;
 import com.lfy.lfy202120201124.entity.UserInfo;
@@ -86,6 +87,15 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FavoritesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //隐私政策
+        rootView.findViewById(R.id.privacy_policy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
                 startActivity(intent);
             }
         });
