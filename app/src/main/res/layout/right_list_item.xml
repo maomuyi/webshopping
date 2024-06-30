@@ -10,7 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/dt990pro"
+        android:src="@mipmap/dt700pro"
          />
 
     <androidx.appcompat.widget.LinearLayoutCompat

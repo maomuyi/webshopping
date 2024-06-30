@@ -11,7 +11,7 @@
             android:id="@+id/product_img"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@mipmap/dt990pro"
+            android:src="@mipmap/dt700pro"
             android:scaleType="centerCrop"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
