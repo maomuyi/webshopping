@@ -1,6 +1,5 @@
 package com.lfy.lfy202120201124.adapter;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
 
     private Fragment fragment;
     private List<String> videoPaths;
+    private VideoViewHolder currentVideoViewHolder;
 
     public VideoPagerAdapter(Fragment fragment, List<String> videoPaths) {
         this.fragment = fragment;
@@ -40,6 +40,7 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
             mp.start();
             mp.setLooping(true);
         });
+        currentVideoViewHolder = holder;
     }
 
     @Override
@@ -53,6 +54,12 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
 
     public int getInitialPosition() {
         return Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2 % videoPaths.size());
+    }
+
+    public void pauseCurrentVideo() {
+        if (currentVideoViewHolder != null && currentVideoViewHolder.videoView.isPlaying()) {
+            currentVideoViewHolder.videoView.pause();
+        }
     }
 
     static class VideoViewHolder extends RecyclerView.ViewHolder {

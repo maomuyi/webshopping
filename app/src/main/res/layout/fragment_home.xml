@@ -7,44 +7,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- 顶部工具栏 -->
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/my_light_primary"
         app:title="首页"
         app:titleTextColor="@color/white"/>
+
+    <!-- 搜索框和排序图标 -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="搜索"
+            android:padding="8dp"
+            android:background="@drawable/search_background"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sortImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sort"
+            android:padding="8dp"
+            android:contentDescription="Sort"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- 内容布局 -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-      <androidx.appcompat.widget.LinearLayoutCompat
-          android:layout_width="100dp"
-          android:background="#f5f5f5"
-          android:layout_height="match_parent">
-          <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/leftRecyclerView"
-              tools:listitem="@layout/left_list_item"
-              app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="100dp"
+            android:background="#f5f5f5"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leftRecyclerView"
+                tools:listitem="@layout/left_list_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-          </androidx.recyclerview.widget.RecyclerView>
-          
-      </androidx.appcompat.widget.LinearLayoutCompat>
-      <androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rightRecyclerView"
-        tools:listitem="@layout/right_list_item"
-        android:layout_width="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_height="match_parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rightRecyclerView"
+                tools:listitem="@layout/right_list_item"
+                android:layout_width="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
