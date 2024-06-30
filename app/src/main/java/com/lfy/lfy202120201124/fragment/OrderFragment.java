@@ -54,7 +54,7 @@ public class OrderFragment extends Fragment {
             public void onItemClick(OrderInfo orderInfo, int position) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("温馨提示")
-                        .setMessage("")
+                        .setMessage("亲~~确认要删除吗？")
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
