@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductDetailsActivity">
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <Toolbar
+
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,18 +19,20 @@
             android:titleTextColor="@color/white"
             android:background="@color/my_light_primary"
             android:navigationIcon="@drawable/baseline_backspace_24"/>
+
         <ImageView
             android:id="@+id/product_img"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/dt700pro"/>
+            android:src="@mipmap/dt700pro" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:orientation="vertical"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -37,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/baseline_currency_yen_24"/>
+                    android:src="@drawable/baseline_currency_yen_24" />
                 <TextView
                     android:id="@+id/product_price"
                     android:layout_width="wrap_content"
@@ -45,36 +49,52 @@
                     android:text="199"
                     android:textColor="#ff6d00"
                     android:textSize="24sp"
-                    android:textStyle="bold"/>
-
+                    android:textStyle="bold" />
             </androidx.appcompat.widget.LinearLayoutCompat>
+
             <TextView
                 android:id="@+id/product_title"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xxxxxxxxxxxxx"/>
+                android:text="xxxxxxxxxxxxx" />
+
             <TextView
                 android:id="@+id/product_details"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="6dp"
-                android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>
-
+                android:text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <Button
-        android:id="@+id/addCar"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="加入购物车" />
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <ImageView
+            android:id="@+id/favorite_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_favorite_border"
+            android:contentDescription="收藏"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="14dp"/>
+
+        <Button
+            android:id="@+id/addCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入购物车"
+            android:layout_marginEnd="16dp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>
