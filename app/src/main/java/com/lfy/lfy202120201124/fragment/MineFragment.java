@@ -18,6 +18,7 @@ import com.lfy.lfy202120201124.FavoritesActivity;
 import com.lfy.lfy202120201124.LoginActivity;
 import com.lfy.lfy202120201124.PrivacyPolicyActivity;
 import com.lfy.lfy202120201124.R;
+import com.lfy.lfy202120201124.SystemNotificationActivity;
 import com.lfy.lfy202120201124.UpdatePwdActivity;
 import com.lfy.lfy202120201124.entity.UserInfo;
 
@@ -96,6 +97,15 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //系统通知
+        rootView.findViewById(R.id.system_notification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SystemNotificationActivity.class);
                 startActivity(intent);
             }
         });
