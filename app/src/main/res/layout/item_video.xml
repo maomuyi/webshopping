@@ -1,10 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.lfy.lfy202120201124.fragment.CustomVideoView
+    <!-- VideoView for playing the video -->
+    <VideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
+    <!-- Button to show/hide comments -->
+    <Button
+        android:id="@+id/button_show_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/my_light_primary"
+        android:text="显示评论"
+        android:textColor="@color/white"
+        android:drawableLeft="@drawable/ic_comment"
+        android:drawablePadding="8dp"
+        android:padding="12dp"
+        android:elevation="4dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
+
+    <!-- Comment layout, initially hidden -->
+    <LinearLayout
+        android:id="@+id/comments_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#66000000"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:elevation="8dp">
+
+        <!-- Close button for comments layout -->
+        <ImageButton
+            android:id="@+id/button_close_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            app:tint="@color/black"
+            android:contentDescription="关闭评论"
+            android:padding="8dp" />
+
+        <!-- RecyclerView for comments -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_comments"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+        <!-- Input area for new comments -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@color/white"
+            android:elevation="2dp">
+
+            <EditText
+                android:id="@+id/edit_text_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="输入评论"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp" />
+
+            <Button
+                android:id="@+id/button_submit_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提交"
+                android:backgroundTint="@color/my_light_primary"
+                android:textColor="@color/white"
+                android:padding="12dp"
+                android:elevation="2dp"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

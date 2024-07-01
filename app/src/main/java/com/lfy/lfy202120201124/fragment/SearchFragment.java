@@ -46,6 +46,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
+                videoPagerAdapter.pauseCurrentVideo();
                 int realPosition = videoPagerAdapter.getRealPosition(position);
                 if (position != realPosition) {
                     viewPager.setCurrentItem(realPosition, false);

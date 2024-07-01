@@ -4,13 +4,20 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lfy.lfy202120201124.R;
+import com.lfy.lfy202120201124.db.VideoDbHelper;
+import com.lfy.lfy202120201124.entity.Comment;
 
 import java.util.List;
 
@@ -19,10 +26,12 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
     private Fragment fragment;
     private List<String> videoPaths;
     private VideoViewHolder currentVideoViewHolder;
+    private VideoDbHelper dbHelper;
 
     public VideoPagerAdapter(Fragment fragment, List<String> videoPaths) {
         this.fragment = fragment;
         this.videoPaths = videoPaths;
+        this.dbHelper = new VideoDbHelper(fragment.getContext());
     }
 
     @NonNull
@@ -39,6 +48,17 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
         holder.videoView.setOnPreparedListener(mp -> {
             mp.start();
             mp.setLooping(true);
+        });
+        holder.bindComments(videoPath);
+        holder.buttonShowComments.setOnClickListener(v -> {
+            if (holder.commentsLayout.getVisibility() == View.GONE) {
+                holder.commentsLayout.setVisibility(View.VISIBLE);
+            } else {
+                holder.commentsLayout.setVisibility(View.GONE);
+            }
+        });
+        holder.buttonCloseComments.setOnClickListener(v -> {
+            holder.commentsLayout.setVisibility(View.GONE);
         });
         currentVideoViewHolder = holder;
     }
@@ -64,10 +84,46 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
 
     static class VideoViewHolder extends RecyclerView.ViewHolder {
         VideoView videoView;
+        RecyclerView recyclerViewComments;
+        EditText editTextComment;
+        Button buttonSubmitComment;
+        Button buttonShowComments;
+        ImageButton buttonCloseComments;
+        LinearLayout commentsLayout;
+        CommentAdapter commentAdapter;
+        VideoDbHelper dbHelper;
 
         public VideoViewHolder(@NonNull View itemView) {
             super(itemView);
             videoView = itemView.findViewById(R.id.video_view);
+            recyclerViewComments = itemView.findViewById(R.id.recycler_view_comments);
+            editTextComment = itemView.findViewById(R.id.edit_text_comment);
+            buttonSubmitComment = itemView.findViewById(R.id.button_submit_comment);
+            buttonShowComments = itemView.findViewById(R.id.button_show_comments);
+            buttonCloseComments = itemView.findViewById(R.id.button_close_comments);
+            commentsLayout = itemView.findViewById(R.id.comments_layout);
+            dbHelper = new VideoDbHelper(itemView.getContext());
+        }
+
+        public void bindComments(String videoUrl) {
+            List<Comment> comments = dbHelper.getCommentsByVideoUrl(videoUrl);
+            commentAdapter = new CommentAdapter(comments);
+            recyclerViewComments.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
+            recyclerViewComments.setAdapter(commentAdapter);
+
+            buttonSubmitComment.setOnClickListener(v -> {
+                String commentText = editTextComment.getText().toString().trim();
+                if (!commentText.isEmpty()) {
+                    dbHelper.addComment(new Comment(videoUrl, "User", commentText));
+                    editTextComment.setText("");
+                    refreshComments(videoUrl);
+                }
+            });
+        }
+
+        private void refreshComments(String videoUrl) {
+            List<Comment> updatedComments = dbHelper.getCommentsByVideoUrl(videoUrl);
+            commentAdapter.updateComments(updatedComments);
         }
     }
 }
