@@ -88,7 +88,7 @@ public class VideoDbHelper extends SQLiteOpenHelper {
                     String userName = cursor.getString(userNameIndex);
                     String content = cursor.getString(contentIndex);
                     String timestamp = cursor.getString(timestampIndex);
-                    comments.add(new Comment(url, userName, content, timestamp));
+                    comments.add(new Comment(userName, content, url, timestamp));
                 } while (cursor.moveToNext());
             }
         } catch (Exception e) {

@@ -3,11 +3,13 @@ package com.lfy.lfy202120201124.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.entity.Comment;
 
@@ -15,10 +17,11 @@ import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
 
-    private List<Comment> comments;
+    private List<Comment> commentList;
+    private static final String FIXED_IMAGE_URL = "G:\\lfy202120201124\\app\\src\\main\\res\\mipmap-mdpi\\touxiang.jpg"; // 固定图片 URL
 
-    public CommentAdapter(List<Comment> comments) {
-        this.comments = comments;
+    public CommentAdapter(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     @NonNull
@@ -30,29 +33,35 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        Comment comment = comments.get(position);
-        holder.userNameTextView.setText(comment.getUserName());
+        Comment comment = commentList.get(position);
+        holder.usernameTextView.setText(comment.getUserName());
         holder.contentTextView.setText(comment.getContent());
+        holder.timestampTextView.setText(comment.getTimestamp());
+        Glide.with(holder.itemView.getContext()).load(FIXED_IMAGE_URL).into(holder.imageView); // 使用固定图片 URL
     }
 
     @Override
     public int getItemCount() {
-        return comments.size();
+        return commentList.size();
     }
 
-    public void updateComments(List<Comment> newComments) {
-        this.comments = newComments;
-        notifyDataSetChanged();
-    }
-
-    static class CommentViewHolder extends RecyclerView.ViewHolder {
-        TextView userNameTextView;
+    public static class CommentViewHolder extends RecyclerView.ViewHolder {
+        TextView usernameTextView;
         TextView contentTextView;
+        TextView timestampTextView;
+        ImageView imageView;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
-            userNameTextView = itemView.findViewById(R.id.user_name);
+            usernameTextView = itemView.findViewById(R.id.username);
             contentTextView = itemView.findViewById(R.id.content);
+            timestampTextView = itemView.findViewById(R.id.timestamp);
+            imageView = itemView.findViewById(R.id.image);
         }
+    }
+
+    public void updateComments(List<Comment> comments) {
+        this.commentList = comments;
+        notifyDataSetChanged();
     }
 }

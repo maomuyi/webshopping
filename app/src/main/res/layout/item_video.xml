@@ -27,35 +27,6 @@
         android:elevation="4dp"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
 
-    <!-- Like button for video -->
-    <LinearLayout
-        android:id="@+id/like_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_margin="16dp"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <ImageButton
-            android:layout_marginTop="10dp"
-            android:id="@+id/button_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_like"
-            app:tint="@color/white"
-            android:contentDescription="点赞" />
-
-        <TextView
-            android:id="@+id/text_like_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_marginTop="4dp"
-            android:text="0" />
-    </LinearLayout>
-
     <!-- Comment layout, initially hidden -->
     <LinearLayout
         android:id="@+id/comments_layout"
@@ -105,15 +76,6 @@
                 android:background="@drawable/edit_text_background"
                 android:padding="8dp" />
 
-            <TextView
-                android:id="@+id/text_view_timestamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="时间"
-                android:textColor="@android:color/darker_gray"
-                android:layout_gravity="center_vertical" />
-
             <Button
                 android:id="@+id/button_submit_comment"
                 android:layout_width="wrap_content"
@@ -126,4 +88,31 @@
                 style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
         </LinearLayout>
     </LinearLayout>
+
+    <!-- Like button -->
+    <ImageButton
+        android:id="@+id/button_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_like" />
+
+    <!-- Timestamp text view -->
+    <TextView
+        android:id="@+id/text_view_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="16dp"
+        android:text="时间" />
+
+    <!-- Like count text view -->
+    <TextView
+        android:id="@+id/text_like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="16dp"
+        android:text="0" />
 </FrameLayout>

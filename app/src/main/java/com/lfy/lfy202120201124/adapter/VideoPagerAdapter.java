@@ -137,7 +137,7 @@ public class VideoPagerAdapter extends RecyclerView.Adapter<VideoPagerAdapter.Vi
                 if (!commentText.isEmpty()) {
                     String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
                     textViewTimestamp.setText(timestamp);
-                    dbHelper.addComment(new Comment(videoUrl, "User", commentText, timestamp));
+                    dbHelper.addComment(new Comment("User", commentText, videoUrl, timestamp)); // 添加固定的图片URL
                     editTextComment.setText("");
                     refreshComments(videoUrl);
                 }
