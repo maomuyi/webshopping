@@ -17,7 +17,7 @@ import java.util.List;
 public class CarDbHelper extends SQLiteOpenHelper {
     private static CarDbHelper sHelper;
     private static final String DB_NAME = "car.db";   //数据库名
-    private static final int VERSION = 3;    //版本号
+    private static final int VERSION = 6;    //版本号
 
     //必须实现其中一个方法
     public CarDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {

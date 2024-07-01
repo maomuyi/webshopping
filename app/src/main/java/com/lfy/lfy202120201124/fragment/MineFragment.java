@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.lfy.lfy202120201124.AboutActivity;
 import com.lfy.lfy202120201124.FavoritesActivity;
@@ -20,6 +19,7 @@ import com.lfy.lfy202120201124.PrivacyPolicyActivity;
 import com.lfy.lfy202120201124.R;
 import com.lfy.lfy202120201124.SystemNotificationActivity;
 import com.lfy.lfy202120201124.UpdatePwdActivity;
+import com.lfy.lfy202120201124.WebViewActivity;
 import com.lfy.lfy202120201124.entity.UserInfo;
 
 public class MineFragment extends Fragment {
@@ -34,11 +34,21 @@ public class MineFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_mine, container, false);
 
-        //初始化控件
+        // 初始化控件
         tv_username = rootView.findViewById(R.id.tv_username);
         tv_nickname = rootView.findViewById(R.id.tv_nickname);
 
-        //退出登录
+        // 我的主页
+        rootView.findViewById(R.id.my_homepage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra("url", "https://www.acwing.com/");
+                startActivity(intent);
+            }
+        });
+
+        // 退出登录
         rootView.findViewById(R.id.exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,9 +64,9 @@ public class MineFragment extends Fragment {
                         .setPositiveButton("相忘于江湖", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //退出
+                                // 退出
                                 getActivity().finish();
-                                //跳转登录
+                                // 跳转登录
                                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                                 startActivity(intent);
                             }
@@ -65,7 +75,7 @@ public class MineFragment extends Fragment {
             }
         });
 
-        //修改密码
+        // 修改密码
         rootView.findViewById(R.id.updatePwd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +84,7 @@ public class MineFragment extends Fragment {
             }
         });
 
-        //关于app
+        // 关于app
         rootView.findViewById(R.id.about).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +93,7 @@ public class MineFragment extends Fragment {
             }
         });
 
-        //我的收藏
+        // 我的收藏
         rootView.findViewById(R.id.my_favorites).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +102,7 @@ public class MineFragment extends Fragment {
             }
         });
 
-        //隐私政策
+        // 隐私政策
         rootView.findViewById(R.id.privacy_policy).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +111,7 @@ public class MineFragment extends Fragment {
             }
         });
 
-        //系统通知
+        // 系统通知
         rootView.findViewById(R.id.system_notification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +127,7 @@ public class MineFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //设置用户数据
+        // 设置用户数据
         UserInfo userInfo = UserInfo.getUserInfo();
         if (null != userInfo) {
             tv_username.setText(userInfo.getUsername());

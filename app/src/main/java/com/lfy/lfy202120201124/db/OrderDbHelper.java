@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderDbHelper extends SQLiteOpenHelper {
     private static OrderDbHelper sHelper;
     private static final String DB_NAME = "order.db";   //数据库名
-    private static final int VERSION = 3;    //版本号
+    private static final int VERSION = 6;    //版本号
 
     //必须实现其中一个构方法
     public OrderDbHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {

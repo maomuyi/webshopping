@@ -1,22 +1,24 @@
 package com.lfy.lfy202120201124.entity;
 
 public class Comment {
-    private String videoUrl;
+    private String url;
     private String userName;
     private String content;
+    private String timestamp;
 
-    public Comment(String videoUrl, String userName, String content) {
-        this.videoUrl = videoUrl;
+    public Comment(String url, String userName, String content, String timestamp) {
+        this.url = url;
         this.userName = userName;
         this.content = content;
+        this.timestamp = timestamp;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUserName() {
@@ -33,5 +35,13 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

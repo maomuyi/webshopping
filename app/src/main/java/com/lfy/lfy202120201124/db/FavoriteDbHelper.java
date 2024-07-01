@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FavoriteDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "favorite_db";
-    private static final int DATABASE_VERSION = 2;  // 更新版本号
+    private static final int DATABASE_VERSION = 6;  // 更新版本号
     private static final String TABLE_NAME = "favorites";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_PRODUCT_ID = "product_id";
